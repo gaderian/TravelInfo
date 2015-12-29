@@ -1,0 +1,26 @@
+<LMSData LastUpdate="2013-12-07 22:29:34">
+    <Offer>
+        <CampaignName>Sista minuten-resor tur och retur</CampaignName>
+        <DepartureName>Stockholm/Arlanda</DepartureName>
+        <OutDate>2013-12-17</OutDate>
+        <DestinationName>Thailand</DestinationName>
+        <CityName>Krabi</CityName>
+        <RoomDescription>Endast flyg</RoomDescription>
+        <JourneyLength>15</JourneyLength>
+        <FlightExtern>BLX843</FlightExtern>
+        <CurrentPrice>13498 kr</CurrentPrice>
+        <OriginalPrice>13748 kr</OriginalPrice>
+        <PriceCurrency>SEK</PriceCurrency>
+        <HotelName/>
+        <HotelImage>
+            http://images.tuinordic.com/travel/images/hotel/Default.jpg
+        </HotelImage>
+        <HotelGrade>0</HotelGrade>
+        <NoOfSeatsRemaining>4</NoOfSeatsRemaining>
+        <HotelGradeString/>
+        <ContentLink/>
+        <BookLink>
+            http://www.fritidsresor.se/boka-resa/BookLink.aspx?depCode=STO&depdate=2013-12-17&dateDay=17&period=15&reqFlightFromCode=STO&destCode=KBV&cityId=746&resortCode=KBA&hotelcode=&lmsCode=L&flightNo=BLX843&roomCode=FL&source=lms&mode=1&type=CHARTER_FLT </BookLink>
+        <JourneyLengthWeeks>2</JourneyLengthWeeks>
+    </Offer>
+</LMSData>

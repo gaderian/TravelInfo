@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="LMSData" type="offerList" />
+
+    <xsd:complexType name="offerList" mixed="true">
+        <xsd:sequence>
+            <xsd:element name="Offer" type="offerType" />
+        </xsd:sequence>
+        <xsd:attribute name="LastUpdate" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="offerType">
+        <xsd:sequence>
+            <xsd:element name="CampaignName" type="xsd:string" />
+            <xsd:element name="DepartureName" type="xsd:string" />
+            <xsd:element name="OutDate" type="xsd:date" />
+            <xsd:element name="DestinationName" type="xsd:string" />
+            <xsd:element name="CityName" type="xsd:string" />
+            <xsd:element name="RoomDescription" type="xsd:string" />
+            <xsd:element name="JourneyLength" type="xsd:string" />
+            <xsd:element name="FlightExtern" type="xsd:string" />
+            <xsd:element name="CurrentPrice" type="xsd:string" />
+            <xsd:element name="OriginalPrice" type="xsd:string" />
+            <xsd:element name="PriceCurrency" type="xsd:string" />
+            <xsd:element name="HotelName" type="xsd:string" />
+            <xsd:element name="HotelImage" type="xsd:string" />
+            <xsd:element name="HotelGrade" type="xsd:int" />
+            <xsd:element name="NoOfSeatsRemaining" type="xsd:int" />
+            <xsd:element name="HotelGradeString" type="xsd:string" />
+            <xsd:element name="ContentLink" type="xsd:string" />
+            <xsd:element name="BookLink" type="xsd:anyURI" />
+            <xsd:element name="JourneyLengthWeeks" type="xsd:int" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+</xsd:schema>
