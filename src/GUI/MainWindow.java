@@ -14,11 +14,12 @@ import java.awt.*;
 public class MainWindow {
     private JFrame frame;
 
-    public MainWindow(TableModel tm) {
+    public MainWindow(Offers offers) {
         frame = new JFrame("TravelInfo");
+        //TODO make card layout, one card with table and one with more info
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel centerPanel = buildCenterPanel(tm);
+        JPanel centerPanel = buildCenterPanel(offers);
 
         frame.add(centerPanel);
         frame.setSize(400, 750);

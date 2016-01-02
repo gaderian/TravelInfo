@@ -1,3 +1,4 @@
+import GUI.TravelOffer;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;

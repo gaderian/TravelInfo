@@ -1,9 +1,11 @@
+package GUI;
+
 import java.net.URL;
 import java.util.Date;
 
 
 /**
- * Class:       TravelOffer
+ * Class:       GUI.TravelOffer
  * <p/>
  * Author:      Erik Moström
  * cs-user:     dv14emm
@@ -28,7 +30,7 @@ public class TravelOffer {
 
     private URL bookingLink;
 
-    protected TravelOffer() {
+    public TravelOffer() {
 
     }
 
