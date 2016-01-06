@@ -17,21 +17,34 @@ public class MainWindow {
     public MainWindow(Offers offers) {
         frame = new JFrame("TravelInfo");
         //TODO make card layout, one card with table and one with more info
+        CardLayout cl = new CardLayout();
+        frame.setLayout(cl);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel centerPanel = buildCenterPanel(offers);
+        JPanel offerList = buildOfferListPanel(offers);
 
-        frame.add(centerPanel);
+        frame.add(offerList);
         frame.setSize(400, 750);
         frame.pack();
         frame.setVisible(true);
+
     }
 
-    private JPanel buildCenterPanel(TableModel tm) {
+    private JPanel buildOfferListPanel(TableModel tm) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
         JTable table = new JTable(tm);
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = table.rowAtPoint(evt.getPoint());
+                int col = table.columnAtPoint(evt.getPoint());
+                if (row >= 0 && col >= 0) {
+                    System.out.println("row: " + row + "\ncol: " + col + "\n");
+                }
+            }
+        });
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane);
 
