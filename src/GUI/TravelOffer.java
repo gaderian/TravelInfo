@@ -26,7 +26,7 @@ public class TravelOffer {
     private String hotelName;
     private URL hotelImage;
     private String roomDescription;
-    private int hotelRating;
+    private float hotelRating;
 
     private URL bookingLink;
 
@@ -122,11 +122,11 @@ public class TravelOffer {
         this.roomDescription = roomDescription;
     }
 
-    public int getHotelRating() {
+    public float getHotelRating() {
         return hotelRating;
     }
 
-    public void setHotelRating(int hotelRating) {
+    public void setHotelRating(float hotelRating) {
         this.hotelRating = hotelRating;
     }
 

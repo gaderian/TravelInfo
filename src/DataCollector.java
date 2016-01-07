@@ -46,7 +46,11 @@ public class DataCollector {
                 DocumentBuilderFactory dbFactory =
                         DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                Document doc = dBuilder.parse(new InputSource(source.openStream()));
+
+                InputSource is = new InputSource(source.openStream());
+                is.setEncoding("UTF-8");
+
+                Document doc = dBuilder.parse(is);
                 Element data = doc.getDocumentElement();
                 data.normalize();
                 offers = doc.getElementsByTagName("Offer");

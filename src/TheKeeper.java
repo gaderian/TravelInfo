@@ -57,6 +57,10 @@ public class TheKeeper implements Offers {
         NodeList nlList =
                 element.getElementsByTagName(tag).item(0).getChildNodes();
         Node nValue = nlList.item(0);
+
+        if (nValue == null){
+            return "";
+        }
         return nValue.getNodeValue();
     }
 
@@ -159,7 +163,7 @@ public class TheKeeper implements Offers {
             offer.setDaysAway(Integer.parseInt(getTagValue("JourneyLength", element)));
 
             offer.setHotelName(getTagValue("HotelName", element));
-            offer.setHotelRating(Integer.parseInt(getTagValue("HotelGrade", element)));
+            offer.setHotelRating(Float.parseFloat(getTagValue("HotelGrade", element).replace(",", ".")));
 
             try {
                 offer.setHotelImage(new URL(getTagValue("HotelImage", element)));
@@ -182,7 +186,7 @@ public class TheKeeper implements Offers {
             offer.setDepartureDate(new Date(year, month, day));
 
         }
-        return null;
+        return offer;
     }
 
     private class OfferInfo {
