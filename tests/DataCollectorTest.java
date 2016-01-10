@@ -17,7 +17,7 @@ public class DataCollectorTest {
     public void shouldAccept() throws Exception {
         DataCollector collector = new DataCollector();
         collector.setSource(new URL("http://www8.cs.umu.se/kurser/5DV135/HT14/labbar/lab2/exempeldata/131209_09:25:00.xml"));
-        assertEquals(1000, collector.update().getLength());
+        assertEquals(1000, collector.collectData().getLength());
     }
 
     @Test

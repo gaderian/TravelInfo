@@ -17,11 +17,11 @@ public class Main {
     public static void main(String[] args) {
         DataCollector collector = new DataCollector();
 
-        final TheKeeper keeper = new TheKeeper();
+        final DataKeeper keeper = new DataKeeper();
         try {
             collector.setSource(new URL("http://www8.cs.umu.se/kurser/5DV135/" +
                     "HT14/labbar/lab2/exempeldata/131209_09:25:00.xml"));
-            keeper.setNodeList(collector.update());
+            keeper.setNodeList(collector.collectData());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {

@@ -1,5 +1,6 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -13,6 +14,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Class:       DataCollector
@@ -41,24 +43,63 @@ public class DataCollector {
      * @return a list of all the travel offers.
      * @throws IOException if unable to read all the offers
      */
-    public NodeList update() throws IOException {
-            try {
-                DocumentBuilderFactory dbFactory =
-                        DocumentBuilderFactory.newInstance();
-                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+    public NodeList collectData() throws IOException {
+        return collect();
+    }
 
-                InputSource is = new InputSource(source.openStream());
-                is.setEncoding("UTF-8");
+    public NodeList collectData(String name) throws IOException {
+        NodeList allOffers = collect();
+        ArrayList<Node> wantedOffers = new ArrayList<>();
 
-                Document doc = dBuilder.parse(is);
-                Element data = doc.getDocumentElement();
-                data.normalize();
-                offers = doc.getElementsByTagName("Offer");
-            } catch (ParserConfigurationException e) {
-                throw new IOException("Unable to configure parser");
-            } catch (SAXException e) {
-                throw new IOException("Not correct format");
+        for (int i = 0; i < allOffers.getLength(); i++) {
+            Node node = allOffers.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element element = (Element) node;
+                if (name.compareToIgnoreCase(getTagValue("DestinationName", element)) == 0){
+                    wantedOffers.add(node);
+                }
             }
+        }
+        wantedOffers.trimToSize();
+        return new ImplementedNL(wantedOffers);
+    }
+
+    /**
+     * Will return the value held by a tag in the xml document.
+     *
+     * @param tag     the name of the tag
+     * @param element the element holding the tag
+     * @return a string representing the value
+     */
+    private String getTagValue(String tag, Element element) {
+        NodeList nlList =
+                element.getElementsByTagName(tag).item(0).getChildNodes();
+        Node nValue = nlList.item(0);
+
+        if (nValue == null){
+            return "";
+        }
+        return nValue.getNodeValue();
+    }
+
+    private NodeList collect() throws IOException{
+        try {
+            DocumentBuilderFactory dbFactory =
+                    DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+
+            InputSource is = new InputSource(source.openStream());
+            is.setEncoding("UTF-8");
+
+            Document doc = dBuilder.parse(is);
+            Element data = doc.getDocumentElement();
+            data.normalize();
+            offers = doc.getElementsByTagName("Offer");
+        } catch (ParserConfigurationException e) {
+            throw new IOException("Unable to configure parser");
+        } catch (SAXException e) {
+            throw new IOException("Not correct format");
+        }
         return offers;
     }
 
@@ -83,6 +124,25 @@ public class DataCollector {
         Validator validator = schema.newValidator();
         validator.validate(xml);
         return true;
+    }
+
+    private class ImplementedNL implements NodeList {
+        //Node[] list;
+        ArrayList<Node> list;
+
+        protected ImplementedNL(ArrayList<Node> list){
+            this.list = list;
+        }
+
+        @Override
+        public Node item(int index) {
+            return list.get(index);
+        }
+
+        @Override
+        public int getLength() {
+            return list.size();
+        }
     }
 
 }

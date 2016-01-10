@@ -37,6 +37,7 @@ public class MainWindow {
         JPanel offerListCard = buildOfferListPanel(offers);
         fullInfoCard = buildFullInfoPanel();
 
+
         window = new JPanel();
         window.setLayout(cl);
         window.add("FullInfo", fullInfoCard);
@@ -91,7 +92,15 @@ public class MainWindow {
             }
         });
         JScrollPane scrollPane = new JScrollPane(table);
-        panel.add(scrollPane);
+
+        JButton updateListButton = new JButton();
+        updateListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                offers.updateOffers();
+            }
+        });
+        panel.add(BorderLayout.CENTER, scrollPane);
 
         return panel;
     }
