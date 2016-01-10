@@ -1,17 +1,12 @@
-package gui;
+package model;
 
 import java.net.URL;
 import java.util.Date;
 
-
 /**
- * Class:       TravelOffer
- * <p/>
- * Author:      Erik Moström
- * cs-user:     dv14emm
- * Date:        2015-12-29
+ * Created by erik on 2016-01-10.
  */
-public class TravelOffer {
+public class Offer {
     private String campaign;
 
     private String departureFrom;
@@ -30,15 +25,14 @@ public class TravelOffer {
 
     private URL bookingLink;
 
-    public TravelOffer() {
-
+    protected Offer() {
     }
 
     public String getCampaign() {
         return campaign;
     }
 
-    public void setCampaign(String campaign) {
+    protected void setCampaign(String campaign) {
         this.campaign = campaign;
     }
 
@@ -46,7 +40,7 @@ public class TravelOffer {
         return departureFrom;
     }
 
-    public void setDepartureFrom(String departureFrom) {
+    protected void setDepartureFrom(String departureFrom) {
         this.departureFrom = departureFrom;
     }
 
@@ -54,7 +48,7 @@ public class TravelOffer {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    protected void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
     }
 
@@ -62,7 +56,7 @@ public class TravelOffer {
         return destinationLand;
     }
 
-    public void setDestinationLand(String destinationLand) {
+    protected void setDestinationLand(String destinationLand) {
         this.destinationLand = destinationLand;
     }
 
@@ -70,7 +64,7 @@ public class TravelOffer {
         return destinationCity;
     }
 
-    public void setDestinationCity(String destinationCity) {
+    protected void setDestinationCity(String destinationCity) {
         this.destinationCity = destinationCity;
     }
 
@@ -78,7 +72,7 @@ public class TravelOffer {
         return daysAway;
     }
 
-    public void setDaysAway(int daysAway) {
+    protected void setDaysAway(int daysAway) {
         this.daysAway = daysAway;
     }
 
@@ -86,7 +80,7 @@ public class TravelOffer {
         return originalPrice;
     }
 
-    public void setOriginalPrice(int originalPrice) {
+    protected void setOriginalPrice(int originalPrice) {
         this.originalPrice = originalPrice;
     }
 
@@ -94,7 +88,7 @@ public class TravelOffer {
         return currentPrice;
     }
 
-    public void setCurrentPrice(int currentPrice) {
+    protected void setCurrentPrice(int currentPrice) {
         this.currentPrice = currentPrice;
     }
 
@@ -102,7 +96,7 @@ public class TravelOffer {
         return hotelName;
     }
 
-    public void setHotelName(String hotelName) {
+    protected void setHotelName(String hotelName) {
         this.hotelName = hotelName;
     }
 
@@ -110,7 +104,7 @@ public class TravelOffer {
         return hotelImage;
     }
 
-    public void setHotelImage(URL hotelImage) {
+    protected void setHotelImage(URL hotelImage) {
         this.hotelImage = hotelImage;
     }
 
@@ -118,7 +112,7 @@ public class TravelOffer {
         return roomDescription;
     }
 
-    public void setRoomDescription(String roomDescription) {
+    protected void setRoomDescription(String roomDescription) {
         this.roomDescription = roomDescription;
     }
 
@@ -126,7 +120,7 @@ public class TravelOffer {
         return hotelRating;
     }
 
-    public void setHotelRating(float hotelRating) {
+    protected void setHotelRating(float hotelRating) {
         this.hotelRating = hotelRating;
     }
 
@@ -134,7 +128,7 @@ public class TravelOffer {
         return bookingLink;
     }
 
-    public void setBookingLink(URL bookingLink) {
+    protected void setBookingLink(URL bookingLink) {
         this.bookingLink = bookingLink;
     }
 }

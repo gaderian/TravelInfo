@@ -1,4 +1,8 @@
-import GUI.MainWindow;
+package controller;
+
+import gui.MainWindow;
+import model.DataCollector;
+import model.DataKeeper;
 import org.xml.sax.SAXException;
 
 import javax.swing.*;
@@ -31,7 +35,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainWindow(keeper);
+                new MainWindow(new Controller(keeper));
             }
         });
     }

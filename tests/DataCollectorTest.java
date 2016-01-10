@@ -1,3 +1,4 @@
+import model.DataCollector;
 import org.junit.Test;
 
 import java.net.URL;

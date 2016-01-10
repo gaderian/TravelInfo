@@ -1,3 +1,5 @@
+package model;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -38,7 +40,7 @@ public class DataCollector {
     }
 
     /**
-     * Gets the latest information from the source given to the DataCollector.
+     * Gets the latest information from the source given to the model.DataCollector.
      *
      * @return a list of all the travel offers.
      * @throws IOException if unable to read all the offers

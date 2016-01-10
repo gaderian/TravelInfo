@@ -1,11 +1,9 @@
-import GUI.Offers;
-import GUI.TravelOffer;
+package model;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.Date;
  * cs-user:     dv14emm
  * Date:        2015-12-29
  */
-public class DataKeeper implements Offers {
+public class DataKeeper {
     private NodeList list;
     private ArrayList<OfferInfo> table;
 
@@ -65,48 +63,24 @@ public class DataKeeper implements Offers {
         return nValue.getNodeValue();
     }
 
-    @Override
-    public int getRowCount() {
+    public int getNrOfOffers() {
         return table.size();
     }
 
-    @Override
-    public int getColumnCount() {
+    public int getNrOfPreviewFields() {
         return 3;
     }
 
-    @Override
-    public String getColumnName(int columnIndex) {
-        switch (columnIndex) {
-            case 0:
-                return "Destination";
-            case 1:
-                return "Date";
-            case 2:
-                return "Price";
-        }
-        return null;
+    public String[] getPreviewFieldNames() {
+        String[] names = {"Destination", "Date", "Price"};
+        return names;
     }
 
-    @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        switch (columnIndex) {
-            case 0:
-                return String.class;
-            case 1:
-                return String.class;
-            case 2:
-                return int.class;
-        }
-        return null;
+    public Class<?>[] getPreviewFieldClasses() {
+        Class<?>[] classes = {String.class, String.class, int.class};
+        return classes;
     }
 
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
-    }
-
-    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         OfferInfo info = table.get(rowIndex);
 
@@ -121,24 +95,8 @@ public class DataKeeper implements Offers {
         return null;
     }
 
-    @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-
-    }
-
-    @Override
-    public void addTableModelListener(TableModelListener l) {
-
-    }
-
-    @Override
-    public void removeTableModelListener(TableModelListener l) {
-
-    }
-
-    @Override
-    public TravelOffer fullInfo(int index) {
-        TravelOffer offer = new TravelOffer();
+    public Offer getOffer(int index) {
+        Offer offer = new Offer();
 
         Node node = list.item(index);
         if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -186,16 +144,6 @@ public class DataKeeper implements Offers {
 
         }
         return offer;
-    }
-
-    @Override
-    public void updateOffers() {
-
-    }
-
-    @Override
-    public void searchOffers(String destination) {
-
     }
 
     private class OfferInfo {
