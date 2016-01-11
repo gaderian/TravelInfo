@@ -6,7 +6,7 @@ import model.Offer;
 /**
  * Created by erik on 2016-01-10.
  *
- * Class for converting between TravelOffer in the GUI package and Offer in the
+ * Class for converting between TravelOffer in the gui package and Offer in the
  * model package.
  */
 public class OfferAdapter {

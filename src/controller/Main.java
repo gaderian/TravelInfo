@@ -21,11 +21,11 @@ public class Main {
     public static void main(String[] args) {
         DataCollector collector = new DataCollector();
 
-        final DataKeeper keeper = new DataKeeper();
+        //final DataKeeper keeper = new DataKeeper();
         try {
             collector.setSource(new URL("http://www8.cs.umu.se/kurser/5DV135/" +
                     "HT14/labbar/lab2/exempeldata/131209_09:25:00.xml"));
-            keeper.setNodeList(collector.collectData());
+            //keeper.setNodeList(collector.collectData());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
@@ -35,7 +35,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainWindow(new Controller(keeper));
+                new MainWindow(new Controller(collector));
             }
         });
     }

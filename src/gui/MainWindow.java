@@ -1,7 +1,11 @@
-package GUI;
+package gui;
+
+import gui.Offers;
+import gui.TravelOffer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,7 +50,6 @@ public class MainWindow {
 
         frame.add(BorderLayout.CENTER, window);
         frame.setSize(600, 550);
-        //frame.pack();
         frame.setVisible(true);
 
     }
@@ -93,14 +96,15 @@ public class MainWindow {
         });
         JScrollPane scrollPane = new JScrollPane(table);
 
-        JButton updateListButton = new JButton();
+        JButton updateListButton = new JButton("Update");
         updateListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                offers.updateOffers();
+                offers.updateOffers(table);
             }
         });
         panel.add(BorderLayout.CENTER, scrollPane);
+        panel.add(BorderLayout.SOUTH, updateListButton);
 
         return panel;
     }

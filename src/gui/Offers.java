@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.table.TableModel;
+import java.awt.*;
 
 /**
  * Class:       Offers
@@ -11,13 +12,9 @@ import javax.swing.table.TableModel;
  */
 public interface Offers extends TableModel {
 
-    TravelOffer fullInfo(int index);
+    gui.TravelOffer fullInfo(int index);
 
-    void updateOffers();
-
-    void update();
-
-    void completeUpdate();
+    void updateOffers(Component c);
 
     void searchOffers(String destination);
 }
