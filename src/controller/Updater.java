@@ -14,19 +14,21 @@ import java.io.IOException;
  * Date:        2016-01-11
  */
 public class Updater extends Thread {
-    Controller controller;
-    DataCollector collector;
+    private Controller controller;
+    private DataCollector collector;
+    private String destination;
 
-    public Updater(Controller controller, DataCollector collector) {
+    public Updater(Controller controller, DataCollector collector, String destination) {
         this.controller = controller;
         this.collector = collector;
+        this.destination = destination;
     }
 
     @Override
     public void run() {
 
         try {
-            final NodeList nlist = collector.collectData();
+            final NodeList nlist = collector.collectData(destination);
 
             SwingUtilities.invokeLater(new Runnable() {
                 @Override

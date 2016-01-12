@@ -1,11 +1,7 @@
 package gui;
 
-import gui.Offers;
-import gui.TravelOffer;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 /**
  * Class:       MainWindow
@@ -77,10 +74,20 @@ public class MainWindow {
         return panel;
     }
 
+    /**
+     *
+     * @param tm
+     * @return
+     */
     private JPanel buildOfferListPanel(TableModel tm) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
+        /*Building the search bar*/
+        JTextField searchField = new JTextField();
+
+
+        /*Building the table*/
         final JTable table = new JTable(tm);
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -96,15 +103,19 @@ public class MainWindow {
         });
         JScrollPane scrollPane = new JScrollPane(table);
 
+        /*Building the update button*/
         JButton updateListButton = new JButton("Update");
         updateListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                offers.updateOffers(table);
+                offers.searchOffers(table, searchField.getText());
             }
         });
+
+        /*Adding everything*/
         panel.add(BorderLayout.CENTER, scrollPane);
         panel.add(BorderLayout.SOUTH, updateListButton);
+        panel.add(BorderLayout.NORTH, searchField);
 
         return panel;
     }
@@ -121,7 +132,7 @@ public class MainWindow {
         String fullInfoText = "Campaign:\t\t " + offer.getCampaign();
 
         fullInfoText += "\n\nDeparts from:\t\t " + offer.getDepartureFrom();
-        fullInfoText += "\nDeparture date:\t " + offer.getDepartureDate();
+        fullInfoText += "\nDeparture date:\t " + offer.getDepartureDate(); //TODO fix format
         fullInfoText += "\nDestination:\t\t " + offer.getDestinationLand() + ", " + offer.getDestinationCity();
         fullInfoText += "\nJourney Length:\t " + offer.getDaysAway() + " days";
 

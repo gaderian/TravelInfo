@@ -16,5 +16,7 @@ public interface Offers extends TableModel {
 
     void updateOffers(Component c);
 
-    void searchOffers(String destination);
+    void searchOffers(Component c, String destination);
+
+    void setUpdateInterval(int minutes);
 }

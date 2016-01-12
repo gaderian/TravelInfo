@@ -120,6 +120,7 @@ public class DataKeeper {
             offer.setHotelName(getTagValue("HotelName", element));
             offer.setHotelRating(Float.parseFloat(getTagValue("HotelGrade", element).replace(",", ".")));
             offer.setRoomDescription(getTagValue("RoomDescription", element));
+            offer.setDepartureDate(getTagValue("OutDate", element));
 
             try {
                 offer.setHotelImage(new URL(getTagValue("HotelImage", element)));
@@ -135,12 +136,6 @@ public class DataKeeper {
                 e.printStackTrace();
             }
 
-            String[] date = getTagValue("OutDate", element).split("-");
-            int year = Integer.parseInt(date[0]);
-            int month = Integer.parseInt(date[1]);
-            int day = Integer.parseInt(date[2]);
-            //TODO change from deprecated method
-            offer.setDepartureDate(new Date(year, month, day));
 
         }
         return offer;

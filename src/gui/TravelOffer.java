@@ -15,7 +15,7 @@ public class TravelOffer {
     private String campaign;
 
     private String departureFrom;
-    private Date departureDate;
+    private String departureDate;
     private String destinationLand;
     private String destinationCity;
     private int daysAway;
@@ -50,11 +50,11 @@ public class TravelOffer {
         this.departureFrom = departureFrom;
     }
 
-    public Date getDepartureDate() {
+    public String getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
 

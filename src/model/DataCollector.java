@@ -25,6 +25,10 @@ import java.util.ArrayList;
  * cs-user:     dv14emm
  * Date:        2015-12-29
  */
+
+/**
+ * Will get information stored as a xml from a specified source.
+ */
 public class DataCollector {
     private NodeList offers;
     private URL source;
@@ -33,7 +37,11 @@ public class DataCollector {
 
     }
 
-    public void setSource(URL source) throws IOException, SAXException {
+    /**
+     * Sets the source to get the information from.
+     * @param source an URL pointing to the location of a xml
+     */
+    public void setSource(URL source) {
         //TODO Doesn't work with urls in the xml file :(
         //if (validate(new StreamSource(source.openStream())));
         this.source = source;
@@ -49,7 +57,17 @@ public class DataCollector {
         return collect();
     }
 
-    public NodeList collectData(String name) throws IOException {
+    public synchronized NodeList collectData(String destinations) throws IOException {
+        if (destinations.isEmpty()){
+            return collect();
+        }
+
+        /*Split to separate destinations*/
+        String[] names = destinations.split(" ?, ?");
+        for (String s: names) {
+            System.out.println(s);
+        }
+
         NodeList allOffers = collect();
         ArrayList<Node> wantedOffers = new ArrayList<>();
 
@@ -57,8 +75,10 @@ public class DataCollector {
             Node node = allOffers.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
-                if (name.compareToIgnoreCase(getTagValue("DestinationName", element)) == 0){
-                    wantedOffers.add(node);
+                for (String name : names) {
+                    if (name.compareToIgnoreCase(getTagValue("DestinationName", element)) == 0){
+                        wantedOffers.add(node);
+                    }
                 }
             }
         }

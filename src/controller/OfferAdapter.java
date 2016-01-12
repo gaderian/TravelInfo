@@ -3,6 +3,8 @@ package controller;
 import gui.TravelOffer;
 import model.Offer;
 
+import java.util.Date;
+
 /**
  * Created by erik on 2016-01-10.
  *
@@ -18,7 +20,6 @@ public class OfferAdapter {
         travelOffer.setCurrentPrice(offer.getCurrentPrice());
         travelOffer.setOriginalPrice(offer.getOriginalPrice());
         travelOffer.setDaysAway(offer.getDaysAway());
-        travelOffer.setDepartureDate(offer.getDepartureDate());
         travelOffer.setDepartureFrom(offer.getDepartureFrom());
         travelOffer.setDestinationCity(offer.getDestinationCity());
         travelOffer.setDestinationLand(offer.getDestinationLand());
@@ -26,6 +27,8 @@ public class OfferAdapter {
         travelOffer.setHotelImage(offer.getHotelImage());
         travelOffer.setHotelRating(offer.getHotelRating());
         travelOffer.setRoomDescription(offer.getRoomDescription());
+
+        travelOffer.setDepartureDate(offer.getDepartureDate());
 
         return travelOffer;
     }

@@ -6,12 +6,13 @@ import model.DataCollector;
 import model.DataKeeper;
 import model.Offer;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /**
  * Class:       Controller
@@ -26,19 +27,28 @@ public class Controller implements Offers {
     private DataKeeper keeper;
     private DataCollector collector;
     private Component component;
+    private Settings settings;
+    private Timer timer;
+
 
     public Controller(DataCollector collector){
         this.collector = collector;
         keeper = new DataKeeper();
+        settings = new Settings();
+        timer = new Timer();
+        setTimer();
+
         try {
-            keeper.setNodeList(collector.collectData());
+            keeper.setNodeList(collector.collectData(settings.getSearchPattern()));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         columnClasses = keeper.getPreviewFieldClasses();
         columnNames = keeper.getPreviewFieldNames();
     }
 
+    /* ****** Offers ****** */
     @Override
     public TravelOffer fullInfo(int index) {
         Offer offer = keeper.getOffer(index);
@@ -47,26 +57,38 @@ public class Controller implements Offers {
 
     @Override
     public void updateOffers(Component c) {
-        try {
-            collector.setSource(new URL("http://www8.cs.umu.se/kurser/5DV135/HT14/labbar/lab2/exempeldata/131209_14:55:09.xml"));
-            component = c;
-            new Updater(this, collector).start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
+        component = c;
+        new Updater(this, collector, settings.getSearchPattern()).start();
     }
 
     protected void update(NodeList nlist) {
         keeper.setNodeList(nlist);
         component.repaint();
+        System.out.println("updated");
     }
 
     @Override
-    public void searchOffers(String destination) {
+    public void searchOffers(Component c, String destination) {
+        settings.setSearchPattern(destination);
+        updateOffers(c);
+    }
+
+    @Override
+    public void setUpdateInterval(int minutes) {
+        settings.setUpdateInterval(minutes);
+        timer.cancel();
+        timer.purge();
+        setTimer();
+    }
+
+    private void setTimer() {
+        int delay = settings.getUpdateInterval();
+        delay = delay*60*1000;
+        timer.scheduleAtFixedRate(new UpdateTimerTask(this), delay, delay);
 
     }
+
+    /* ****** TableModel ****** */
 
     @Override
     public int getRowCount() {
@@ -111,5 +133,19 @@ public class Controller implements Offers {
     @Override
     public void removeTableModelListener(TableModelListener l) {
 
+    }
+
+    private class UpdateTimerTask extends TimerTask {
+
+        private final Controller controller;
+
+        public UpdateTimerTask(Controller c){
+            controller = c;
+        }
+
+        @Override
+        public void run() {
+            controller.updateOffers(component);
+        }
     }
 }
