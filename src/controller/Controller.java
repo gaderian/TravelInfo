@@ -7,8 +7,6 @@ import model.DataKeeper;
 import model.Offer;
 import org.w3c.dom.NodeList;
 
-import javax.swing.event.TableModelListener;
-import java.awt.*;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,7 +30,6 @@ public class Controller extends Offers {
     private Class<?>[] columnClasses;
     private DataKeeper keeper;
     private DataCollector collector;
-    private Component component;
     private Settings settings;
     private Timer timer;
 
@@ -75,40 +72,34 @@ public class Controller extends Offers {
     /**
      * Will start a new thread on which the download of the latest data will be
      * made.
-     *
-     * @param c a component which should be repainted after an update.
      */
     @Override
-    public void updateOffers(Component c) {
-        component = c;
+    public void updateOffers() {
         new Updater(this, collector, settings.getSearchPattern()).start();
     }
 
     /**
-     * Called by the EDT after a completed update to use the new data. Should
-     * only be called by the EDT to avoid problems if multiple updates are
-     * running.
+     * Called by the EDT after a completed update to use the new data. Also
+     * tells all listeners added that it has been updated.
      *
      * @param nlist the new data in the form of a NodeList
      */
     protected void update(NodeList nlist) {
         //TODO see if it can be replaced by listeners.
         keeper.setNodeList(nlist);
-        component.revalidate();
-        component.repaint();
+        fireTableStructureChanged();
     }
 
     /**
      * Will run an update from the source and only taking out the offers with
      * the desired destination.
      *
-     * @param c a component which should be repainted after a search
      * @param destination a string specifying the search.
      */
     @Override
-    public void searchOffers(Component c, String destination) {
+    public void searchOffers(String destination) {
         settings.setSearchPattern(destination);
-        updateOffers(c);
+        updateOffers();
     }
 
     /**
@@ -211,7 +202,7 @@ public class Controller extends Offers {
 
         @Override
         public void run() {
-            controller.updateOffers(component);
+            controller.updateOffers();
         }
     }
 }

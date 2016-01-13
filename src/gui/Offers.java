@@ -29,20 +29,17 @@ public abstract class Offers extends AbstractTableModel {
 
     /**
      * Called to force an update of the information provided.
-     *
-     * @param c a component which should be repainted after an update.
      */
-    abstract public void updateOffers(Component c);
+    abstract public void updateOffers();
 
     /**
      * Search the offers for offers with certain countries as destinations. The
      * search can be made on several destinations at one time, each destination
      * should be separated by a comma ",". The search is not case sensitive.
      *
-     * @param c a component which should be repainted after a search
      * @param destination a string specifying the search.
      */
-    abstract public void searchOffers(Component c, String destination);
+    abstract public void searchOffers(String destination);
 
     /**
      * Sets the desired interval between automated updates. The interval is

@@ -2,6 +2,8 @@ package gui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -242,6 +244,14 @@ public class MainWindow {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
+        tm.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                window.revalidate();
+                window.repaint();
+            }
+        });
+
         /*Building the table*/
         final JTable table = new JTable(tm);
         table.addMouseListener(new MouseAdapter() {
@@ -263,7 +273,7 @@ public class MainWindow {
         updateListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                offers.updateOffers(window);
+                offers.updateOffers();
             }
         });
 
@@ -273,7 +283,7 @@ public class MainWindow {
         Action searchAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                offers.searchOffers(table, searchField.getText());
+                offers.searchOffers(searchField.getText());
             }
         };
         searchField.setBorder(BorderFactory.createTitledBorder("search"));
