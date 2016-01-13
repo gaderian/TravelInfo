@@ -132,8 +132,7 @@ public class DataKeeper {
             try {
                 offer.setBookingLink(new URL(getTagValue("BookLink", element)));
             } catch (MalformedURLException e) {
-                //TODO should not crash but should probably do something about the missing link...
-                e.printStackTrace();
+                // No/broken booking link
             }
 
 

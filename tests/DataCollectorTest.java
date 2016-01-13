@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
  * Date:        2015-12-29
  */
 public class DataCollectorTest {
+    //TODO write more tests
 
     @Test
     public void shouldAccept() throws Exception {

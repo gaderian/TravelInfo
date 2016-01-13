@@ -1,6 +1,6 @@
 package gui;
 
-import javax.swing.table.TableModel;
+import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 
 /**
@@ -10,13 +10,17 @@ import java.awt.*;
  * cs-user:     dv14emm
  * Date:        1/2/16
  */
-public interface Offers extends TableModel {
+public abstract class Offers extends AbstractTableModel {
 
-    gui.TravelOffer fullInfo(int index);
+    abstract public gui.TravelOffer fullInfo(int index);
 
-    void updateOffers(Component c);
+    abstract public void updateOffers(Component c);
 
-    void searchOffers(Component c, String destination);
+    abstract public void searchOffers(Component c, String destination);
 
-    void setUpdateInterval(int minutes);
+    abstract public void setUpdateInterval(int minutes);
+
+    abstract public int getUpdateInterval();
+
+    abstract public String getSearch();
 }

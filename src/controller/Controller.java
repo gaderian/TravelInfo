@@ -7,7 +7,9 @@ import model.DataKeeper;
 import model.Offer;
 import org.w3c.dom.NodeList;
 
+import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Timer;
@@ -21,7 +23,7 @@ import java.util.TimerTask;
  * cs-user:     dv14emm
  * Date:        2016-01-11
  */
-public class Controller implements Offers {
+public class Controller extends Offers {
     private String[] columnNames;
     private Class<?>[] columnClasses;
     private DataKeeper keeper;
@@ -35,7 +37,6 @@ public class Controller implements Offers {
         this.collector = collector;
         keeper = new DataKeeper();
         settings = new Settings();
-        timer = new Timer();
         setTimer();
 
         try {
@@ -63,8 +64,8 @@ public class Controller implements Offers {
 
     protected void update(NodeList nlist) {
         keeper.setNodeList(nlist);
+        component.revalidate();
         component.repaint();
-        System.out.println("updated");
     }
 
     @Override
@@ -81,11 +82,21 @@ public class Controller implements Offers {
         setTimer();
     }
 
+    @Override
+    public int getUpdateInterval() {
+        return settings.getUpdateInterval();
+    }
+
+    @Override
+    public String getSearch() {
+        return settings.getSearchPattern();
+    }
+
     private void setTimer() {
         int delay = settings.getUpdateInterval();
-        delay = delay*60*1000;
+        delay = delay*1000*60;
+        timer = new Timer();
         timer.scheduleAtFixedRate(new UpdateTimerTask(this), delay, delay);
-
     }
 
     /* ****** TableModel ****** */

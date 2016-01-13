@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 /**
  * Class:       DataCollector
- * <p/>
+ * <p>
  * Author:      Erik Moström
  * cs-user:     dv14emm
  * Date:        2015-12-29
@@ -33,7 +33,7 @@ public class DataCollector {
     private NodeList offers;
     private URL source;
 
-    public DataCollector(){
+    public DataCollector() {
 
     }
 
@@ -42,8 +42,6 @@ public class DataCollector {
      * @param source an URL pointing to the location of a xml
      */
     public void setSource(URL source) {
-        //TODO Doesn't work with urls in the xml file :(
-        //if (validate(new StreamSource(source.openStream())));
         this.source = source;
     }
 
@@ -58,15 +56,12 @@ public class DataCollector {
     }
 
     public synchronized NodeList collectData(String destinations) throws IOException {
-        if (destinations.isEmpty()){
+        if (destinations.isEmpty()) {
             return collect();
         }
 
         /*Split to separate destinations*/
-        String[] names = destinations.split(" ?, ?");
-        for (String s: names) {
-            System.out.println(s);
-        }
+        String[] names = destinations.split(" ?, ?| $");
 
         NodeList allOffers = collect();
         ArrayList<Node> wantedOffers = new ArrayList<>();
@@ -76,7 +71,7 @@ public class DataCollector {
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
                 for (String name : names) {
-                    if (name.compareToIgnoreCase(getTagValue("DestinationName", element)) == 0){
+                    if (name.compareToIgnoreCase(getTagValue("DestinationName", element)) == 0) {
                         wantedOffers.add(node);
                     }
                 }
@@ -91,20 +86,21 @@ public class DataCollector {
      *
      * @param tag     the name of the tag
      * @param element the element holding the tag
-     * @return a string representing the value
+     * @return a string representing the value, if null an empty string will be
+     * returned
      */
     private String getTagValue(String tag, Element element) {
         NodeList nlList =
                 element.getElementsByTagName(tag).item(0).getChildNodes();
         Node nValue = nlList.item(0);
 
-        if (nValue == null){
+        if (nValue == null) {
             return "";
         }
         return nValue.getNodeValue();
     }
 
-    private NodeList collect() throws IOException{
+    private NodeList collect() throws IOException {
         try {
             DocumentBuilderFactory dbFactory =
                     DocumentBuilderFactory.newInstance();
@@ -125,34 +121,10 @@ public class DataCollector {
         return offers;
     }
 
-    /**
-     * TODO currently not in use
-     * Validates the file so that it is structured in the expected way.
-     *
-     * @param xml TODO
-     * @return
-     * @throws IOException
-     * @throws SAXException
-     */
-    private boolean validate(StreamSource xml)
-            throws IOException, SAXException {
-
-        String schemaPath = "schema.xsd";
-
-        String schemaLang = "http://www.w3.org/2001/XMLSchema";
-        SchemaFactory factory = SchemaFactory.newInstance(schemaLang);
-        URL url = getClass().getResource(schemaPath);
-        Schema schema = factory.newSchema(new StreamSource(url.openStream()));
-        Validator validator = schema.newValidator();
-        validator.validate(xml);
-        return true;
-    }
-
     private class ImplementedNL implements NodeList {
-        //Node[] list;
         ArrayList<Node> list;
 
-        protected ImplementedNL(ArrayList<Node> list){
+        protected ImplementedNL(ArrayList<Node> list) {
             this.list = list;
         }
 

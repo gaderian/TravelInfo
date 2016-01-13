@@ -19,14 +19,14 @@ import java.net.URL;
  */
 public class Main {
 
+    //TODO class comments for all classes
     public static void main(String[] args) {
         DataCollector collector = new DataCollector();
 
         //final DataKeeper keeper = new DataKeeper();
         try {
-            collector.setSource(new URL("http://www8.cs.umu.se/kurser/5DV135/" +
-                    "HT14/labbar/lab2/exempeldata/131209_09:25:00.xml"));
-            //keeper.setNodeList(collector.collectData());
+            collector.setSource(new URL("http://www.fritidsresor.se/Blandade-" +
+                    "Sidor/feeds/tradera/"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
