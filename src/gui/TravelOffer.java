@@ -1,7 +1,6 @@
 package gui;
 
 import java.net.URL;
-import java.util.Date;
 
 
 /**
@@ -10,6 +9,11 @@ import java.util.Date;
  * Author:      Erik Moström
  * cs-user:     dv14emm
  * Date:        2015-12-29
+ */
+
+/**
+ * This class is a holder of information. The information in a TravelOffer is
+ * all the information the user could use when searching for a trip.
  */
 public class TravelOffer {
     private String campaign;
@@ -30,6 +34,9 @@ public class TravelOffer {
 
     private URL bookingLink;
 
+    /**
+     * Creates an instance of TravelOffer.
+     */
     public TravelOffer() {
 
     }
@@ -162,7 +169,7 @@ public class TravelOffer {
     }
 
     /**
-     * Returns the price provided by the offer.
+     * Returns the price provided in the offer.
      *
      * @return the current price of the trip.
      */
@@ -170,46 +177,101 @@ public class TravelOffer {
         return currentPrice;
     }
 
+    /**
+     * Sets the price provided in the offer.
+     *
+     * @param currentPrice the current price of the trip
+     */
     public void setCurrentPrice(int currentPrice) {
         this.currentPrice = currentPrice;
     }
 
+    /**
+     * Returns the name of the hotel.
+     *
+     * @return the name of the hotel
+     */
     public String getHotelName() {
         return hotelName;
     }
 
+    /**
+     * Sets the name of the hotel.
+     *
+     * @param hotelName the name of the hotel
+     */
     public void setHotelName(String hotelName) {
         this.hotelName = hotelName;
     }
 
+    /**
+     * Returns an URL to the location of the image for the hotel.
+     *
+     * @return URL to the hotel image
+     */
     public URL getHotelImage() {
         return hotelImage;
     }
 
+    /**
+     * Sets the URL to the location of the image for the hotel.
+     *
+     * @param hotelImage URL to the hotel image
+     */
     public void setHotelImage(URL hotelImage) {
         this.hotelImage = hotelImage;
     }
 
+    /**
+     * Returns the description of the room included in the description.
+     *
+     * @return the description of the room.
+     */
     public String getRoomDescription() {
         return roomDescription;
     }
 
+    /**
+     * Sets the description of the room included in the offer.
+     *
+     * @param roomDescription a description of the room
+     */
     public void setRoomDescription(String roomDescription) {
         this.roomDescription = roomDescription;
     }
 
+    /**
+     * Returns the rating of the hotel.
+     *
+     * @return the rating of the hotel
+     */
     public float getHotelRating() {
         return hotelRating;
     }
 
+    /**
+     * Sets the rating of the hotel.
+     *
+     * @param hotelRating the rating of the hotel
+     */
     public void setHotelRating(float hotelRating) {
         this.hotelRating = hotelRating;
     }
 
+    /**
+     * Returns the URL of where one can book the trip of the offer.
+     *
+     * @return the URL where one can book
+     */
     public URL getBookingLink() {
         return bookingLink;
     }
 
+    /**
+     * Sets the URL to where one can book the trip.
+     *
+     * @param bookingLink the URL where one can book
+     */
     public void setBookingLink(URL bookingLink) {
         this.bookingLink = bookingLink;
     }

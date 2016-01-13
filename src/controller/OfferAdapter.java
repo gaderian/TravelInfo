@@ -3,15 +3,27 @@ package controller;
 import gui.TravelOffer;
 import model.Offer;
 
-import java.util.Date;
+/**
+ * Class:       OfferAdapter
+ *
+ * Author:      Erik Moström
+ * cs-user:     dv14emm
+ * Date:        2016-01-10
+ */
 
 /**
- * Created by erik on 2016-01-10.
  *
  * Class for converting between TravelOffer in the gui package and Offer in the
  * model package.
  */
 public class OfferAdapter {
+    /**
+     * Creates a new instance of {@link TravelOffer} containing the information
+     * in the given {@link Offer}
+     *
+     * @param offer the Offer containing the original information.
+     * @return a instance of TravelOffer containing the information of the Offer
+     */
     public static TravelOffer generateTravelOffer(Offer offer){
         TravelOffer travelOffer = new TravelOffer();
 

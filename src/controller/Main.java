@@ -2,11 +2,8 @@ package controller;
 
 import gui.MainWindow;
 import model.DataCollector;
-import model.DataKeeper;
-import org.xml.sax.SAXException;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -17,13 +14,16 @@ import java.net.URL;
  * cs-user:     dv14emm
  * Date:        2015-12-29
  */
+
+/**
+ * Starts the application.
+ */
 public class Main {
 
     //TODO class comments for all classes
     public static void main(String[] args) {
         DataCollector collector = new DataCollector();
 
-        //final DataKeeper keeper = new DataKeeper();
         try {
             collector.setSource(new URL("http://www.fritidsresor.se/Blandade-" +
                     "Sidor/feeds/tradera/"));

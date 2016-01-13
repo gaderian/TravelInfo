@@ -7,9 +7,7 @@ import model.DataKeeper;
 import model.Offer;
 import org.w3c.dom.NodeList;
 
-import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Timer;
@@ -23,6 +21,12 @@ import java.util.TimerTask;
  * cs-user:     dv14emm
  * Date:        2016-01-11
  */
+
+/**
+ * This class is the connector between the model and gui of the application.
+ * This will take care of all communication between the different parts of the
+ * application.
+ */
 public class Controller extends Offers {
     private String[] columnNames;
     private Class<?>[] columnClasses;
@@ -33,6 +37,11 @@ public class Controller extends Offers {
     private Timer timer;
 
 
+    /**
+     * Creates a new instance of Controller.
+     *
+     * @param collector the collector to be used for getting the data.
+     */
     public Controller(DataCollector collector){
         this.collector = collector;
         keeper = new DataKeeper();
@@ -50,30 +59,64 @@ public class Controller extends Offers {
     }
 
     /* ****** Offers ****** */
+
+    /**
+     * Will get the wanted information from the model.
+     *
+     * @param index the index of the wanted offer
+     * @return the specified offers full information
+     */
     @Override
     public TravelOffer fullInfo(int index) {
         Offer offer = keeper.getOffer(index);
         return OfferAdapter.generateTravelOffer(offer);
     }
 
+    /**
+     * Will start a new thread on which the download of the latest data will be
+     * made.
+     *
+     * @param c a component which should be repainted after an update.
+     */
     @Override
     public void updateOffers(Component c) {
         component = c;
         new Updater(this, collector, settings.getSearchPattern()).start();
     }
 
+    /**
+     * Called by the EDT after a completed update to use the new data. Should
+     * only be called by the EDT to avoid problems if multiple updates are
+     * running.
+     *
+     * @param nlist the new data in the form of a NodeList
+     */
     protected void update(NodeList nlist) {
+        //TODO see if it can be replaced by listeners.
         keeper.setNodeList(nlist);
         component.revalidate();
         component.repaint();
     }
 
+    /**
+     * Will run an update from the source and only taking out the offers with
+     * the desired destination.
+     *
+     * @param c a component which should be repainted after a search
+     * @param destination a string specifying the search.
+     */
     @Override
     public void searchOffers(Component c, String destination) {
         settings.setSearchPattern(destination);
         updateOffers(c);
     }
 
+    /**
+     * Changes the settings of the application and sets the timer with the new
+     * interval. The timer will be reset when the interval is changed.
+     *
+     * @param minutes the minutes between automated updates.
+     */
     @Override
     public void setUpdateInterval(int minutes) {
         settings.setUpdateInterval(minutes);
@@ -82,16 +125,31 @@ public class Controller extends Offers {
         setTimer();
     }
 
+    /**
+     * Returns the update interval saved in the settings. It will be given in
+     * minutes.
+     *
+     * @return the update interval saved in the settings.
+     */
     @Override
     public int getUpdateInterval() {
         return settings.getUpdateInterval();
     }
 
+    /**
+     * Returns the search pattern saved in the settings.
+     *
+     * @return the search pattern saved in the settings
+     */
     @Override
     public String getSearch() {
         return settings.getSearchPattern();
     }
 
+    /**
+     * Will reset the timer and set the interval to the value saved in the
+     * settings.
+     */
     private void setTimer() {
         int delay = settings.getUpdateInterval();
         delay = delay*1000*60;
@@ -136,20 +194,17 @@ public class Controller extends Offers {
 
     }
 
-    @Override
-    public void addTableModelListener(TableModelListener l) {
-
-    }
-
-    @Override
-    public void removeTableModelListener(TableModelListener l) {
-
-    }
-
+    /**
+     * Class for using with the timer.
+     */
     private class UpdateTimerTask extends TimerTask {
-
         private final Controller controller;
 
+        /**
+         * Creates a new instance of UpdateTimerTask
+         *
+         * @param c the Controller which will run the update.
+         */
         public UpdateTimerTask(Controller c){
             controller = c;
         }

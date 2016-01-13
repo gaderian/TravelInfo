@@ -10,10 +10,6 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -46,7 +42,7 @@ public class DataCollector {
     }
 
     /**
-     * Gets the latest information from the source given to the model.DataCollector.
+     * Gets the latest information from the source given to the DataCollector.
      *
      * @return a list of all the travel offers.
      * @throws IOException if unable to read all the offers
@@ -55,23 +51,35 @@ public class DataCollector {
         return collect();
     }
 
-    public synchronized NodeList collectData(String destinations) throws IOException {
+    /**
+     * Collects the latest data from the specified source. If
+     * {@code destination} is an empty string all the available offers will be
+     * returned, otherwise just the offers with a destination matching one of
+     * the destinations in the search string.
+     *
+     * @param destinations a search string with destinations separated by ","
+     * @return a NodeList containing the wanted offers.
+     * @throws IOException if something goes wrong with the parsing of the data
+     */
+    public  NodeList collectData(String destinations) throws IOException {
+        NodeList allOffers = collect();
+
         if (destinations.isEmpty()) {
-            return collect();
+            return allOffers;
         }
 
-        /*Split to separate destinations*/
+        /*Split into separate destinations*/
         String[] names = destinations.split(" ?, ?| $");
 
-        NodeList allOffers = collect();
-        ArrayList<Node> wantedOffers = new ArrayList<>();
+        ArrayList<Node> wantedOffers = new ArrayList<>(1000);
 
         for (int i = 0; i < allOffers.getLength(); i++) {
             Node node = allOffers.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
                 for (String name : names) {
-                    if (name.compareToIgnoreCase(getTagValue("DestinationName", element)) == 0) {
+                    if (name.compareToIgnoreCase(getTagValue("DestinationName",
+                            element)) == 0) {
                         wantedOffers.add(node);
                     }
                 }
@@ -100,6 +108,13 @@ public class DataCollector {
         return nValue.getNodeValue();
     }
 
+    /**
+     * Gets the latest data from the set source. Gets the data and makes a
+     * NodeList containing all the offer elements in the source xml.
+     *
+     * @return a NodeList containing all offers.
+     * @throws IOException if anything goes wrong when parsing the xml
+     */
     private NodeList collect() throws IOException {
         try {
             DocumentBuilderFactory dbFactory =
@@ -121,10 +136,18 @@ public class DataCollector {
         return offers;
     }
 
+    /**
+     * A simple implementation of {@link NodeList}.
+     */
     private class ImplementedNL implements NodeList {
-        ArrayList<Node> list;
+        final private ArrayList<Node> list;
 
-        protected ImplementedNL(ArrayList<Node> list) {
+        /**
+         * Creates an instance of ImplementedNL.
+         *
+         * @param list an ArrayList containing all the nodes of the new NodeList
+         */
+        private ImplementedNL(ArrayList<Node> list) {
             this.list = list;
         }
 

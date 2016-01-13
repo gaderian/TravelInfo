@@ -21,17 +21,15 @@ import java.net.URISyntaxException;
  */
 
 /**
- * Used to set up the interface of a application showing travel offers.
+ * Used to set up the user interface of a application showing travel offers.
  */
 public class MainWindow {
     private JFrame frame;
-    private JPanel fullInfoCard;
     private JPanel window;
     private CardLayout cl;
     private Offers offers;
     private JTextPane fullInfo;
     private ImageIcon hotelImage;
-    private JMenuBar menuBar;
     private URI bookingLink;
 
     /**
@@ -47,8 +45,8 @@ public class MainWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel offerListCard = buildOfferListPanel(offers);
-        fullInfoCard = buildFullInfoPanel();
-        menuBar = buildMenuBar();
+        JPanel fullInfoCard = buildFullInfoPanel();
+        JMenuBar menuBar = buildMenuBar();
 
 
         window = new JPanel();
