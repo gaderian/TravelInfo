@@ -5,6 +5,7 @@ import gui.TravelOffer;
 import model.DataCollector;
 import model.DataKeeper;
 import model.Offer;
+import model.Settings;
 import org.w3c.dom.NodeList;
 
 import java.io.IOException;

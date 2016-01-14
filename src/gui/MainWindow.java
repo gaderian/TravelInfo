@@ -59,7 +59,7 @@ public class MainWindow {
 
         frame.add(BorderLayout.CENTER, window);
         frame.setJMenuBar(menuBar);
-        frame.setSize(600, 550);
+        frame.setSize(600, 650);
         frame.setVisible(true);
 
     }
@@ -91,7 +91,7 @@ public class MainWindow {
      * @return the finished JMenuItem
      */
     private JMenuItem buildHelpItem() {
-        JMenuItem help = new JMenuItem("Help");
+        JMenuItem help = new JMenuItem("Info");
         help.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -117,25 +117,29 @@ public class MainWindow {
         ButtonGroup group = new ButtonGroup();
 
         /*30 min button*/
-        JRadioButtonMenuItem button30 = new JRadioButtonMenuItem(interval30 + " min");
+        JRadioButtonMenuItem button30 = new JRadioButtonMenuItem(interval30 +
+                " min");
         button30.setActionCommand(String.valueOf(interval30));
         group.add(button30);
         intervalMenu.add(button30);
 
         /*60 min button*/
-        JRadioButtonMenuItem button60 = new JRadioButtonMenuItem(interval60 + " min");
+        JRadioButtonMenuItem button60 = new JRadioButtonMenuItem(interval60 +
+                " min");
         button60.setActionCommand(String.valueOf(interval60));
         group.add(button60);
         intervalMenu.add(button60);
 
         /*90 min button*/
-        JRadioButtonMenuItem button90 = new JRadioButtonMenuItem(interval90 + " min");
+        JRadioButtonMenuItem button90 = new JRadioButtonMenuItem(interval90 +
+                " min");
         button90.setActionCommand(String.valueOf(interval90));
         group.add(button90);
         intervalMenu.add(button90);
 
         /*120 min button*/
-        JRadioButtonMenuItem button120 = new JRadioButtonMenuItem(interval120 + " min");
+        JRadioButtonMenuItem button120 = new JRadioButtonMenuItem(interval120 +
+                " min");
         button120.setActionCommand(String.valueOf(interval120));
         group.add(button120);
         intervalMenu.add(button120);
@@ -159,7 +163,8 @@ public class MainWindow {
         ActionListener buttonListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                offers.setUpdateInterval(Integer.parseInt(e.getActionCommand()));
+                offers.setUpdateInterval(Integer.parseInt(
+                        e.getActionCommand()));
             }
         };
 
@@ -209,8 +214,10 @@ public class MainWindow {
         bookButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-                if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                Desktop desktop = Desktop.isDesktopSupported() ?
+                        Desktop.getDesktop() : null;
+                if (desktop != null &&
+                        desktop.isSupported(Desktop.Action.BROWSE)) {
                     try {
                         desktop.browse(bookingLink);
                     } catch (Exception exception) {
@@ -286,7 +293,8 @@ public class MainWindow {
                 offers.searchOffers(searchField.getText());
             }
         };
-        searchField.setBorder(BorderFactory.createTitledBorder("search"));
+        searchField.setBorder(BorderFactory.createTitledBorder("search " +
+                "destinations"));
         searchField.addActionListener(searchAction);
         searchField.setText(offers.getSearch());
 

@@ -41,15 +41,6 @@ public class DataCollector {
         this.source = source;
     }
 
-    /**
-     * Gets the latest information from the source given to the DataCollector.
-     *
-     * @return a list of all the travel offers.
-     * @throws IOException if unable to read all the offers
-     */
-    public NodeList collectData() throws IOException {
-        return collect();
-    }
 
     /**
      * Collects the latest data from the specified source. If

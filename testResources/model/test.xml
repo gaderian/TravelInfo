@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<LMSData LastUpdate="2013-12-09 09:19:59">
+    <Offer>
+        <CampaignName>EF Canarias</CampaignName>
+        <DepartureName>Stockholm/Arlanda</DepartureName>
+        <OutDate>2014-01-12</OutDate>
+        <DestinationName>Gran Canaria</DestinationName>
+        <CityName>Gran Canaria</CityName>
+        <RoomDescription>Endast flyg</RoomDescription>
+        <JourneyLength>8</JourneyLength>
+        <FlightExtern>DY9773</FlightExtern>
+        <CurrentPrice>2498 kr</CurrentPrice>
+        <OriginalPrice>2648 kr</OriginalPrice>
+        <PriceCurrency>SEK</PriceCurrency>
+        <HotelName/>
+        <HotelImage>
+            http://images.tuinordic.com/travel/images/hotel/Default.jpg
+        </HotelImage>
+        <HotelGrade>0</HotelGrade>
+        <NoOfSeatsRemaining>8</NoOfSeatsRemaining>
+        <HotelGradeString/>
+        <ContentLink/>
+        <BookLink>http://www.fritidsresor.se/boka-resa/BookLink.aspx?depCode=STO&amp;depdate=2014-01-12&amp;dateDay=12&amp;period=8&amp;reqFlightFromCode=STO&amp;destCode=LPA&amp;cityId=52&amp;resortCode=GEX&amp;hotelcode=&amp;lmsCode=A&amp;flightNo=DY9773&amp;roomCode=FL&amp;source=lms&amp;mode=1&amp;type=CHARTER_FLT</BookLink>
+        <JourneyLengthWeeks>1</JourneyLengthWeeks>
+    </Offer>
+</LMSData>

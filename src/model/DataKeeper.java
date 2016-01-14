@@ -103,7 +103,7 @@ public class DataKeeper {
      * @return the names of the preview fields
      */
     public String[] getPreviewFieldNames() {
-        return new String[]{"Destination", "Date", "Price"};
+        return new String[]{"Destination", "Departure Date", "Price"};
     }
 
     /**
